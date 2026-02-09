@@ -514,7 +514,21 @@ class YOUR_CLASS_NAME: NSObject, CubidNativeAdFactory {
       
 ## Native Registery Plugin
 
+이 단계는 Flutter에서 사용하는 factoryId와 플랫폼별 네이티브 광고 팩토리를 연결(register) 하는 과정입니다.
+한 번만 등록되며, 이후 Flutter의 CubidNativeAd 위젯에서 동일한 factoryId를 사용해 해당 네이티브 레이아웃이 호출됩니다.
+
+Flutter ↔ 플랫폼 네이티브 광고 팩토리를 매핑하는 레지스트리 역할을 합니다.
+* factoryId는 Flutter와 네이티브를 연결하는 고유 키입니다
+* Flutter의 CubidNativeAd(factoryId: ...)와 반드시 동일해야 합니다
+* 앱 실행 시 한 번만 등록하면 됩니다
+
 ### Android (Kotlin)
+
+Android에서는 configureFlutterEngine에서 네이티브 광고 팩토리를 등록합니다.
+AppNativeAdFactory()는 CubidNativeAdFactory 구현체입니다
+"YOUR_NATIVE_FACTORY_ID"는 Flutter에서 사용하는 factoryId와 일치해야 합니다
+이 등록을 통해 Flutter에서 네이티브 광고가 요청되면,
+SDK가 해당 팩토리를 사용해 XML 레이아웃 기반 네이티브 광고 뷰를 구성합니다
 
 ```kotlin
 import com.adforus.cubid_flutter.CubidFlutterPlugin
@@ -533,6 +547,12 @@ class MainActivity : FlutterActivity() {
 ```
 
 ### iOS (Swift)
+
+iOS에서는 AppDelegate의 didFinishLaunchingWithOptions에서 팩토리를 등록합니다.
+YOUR_CLASS_NAME은 CubidNativeAdFactory를 구현한 클래스입니다
+factoryId는 Flutter에서 사용하는 값과 정확히 동일해야 합니다
+등록 이후 네이티브 광고 요청 시,
+SDK가 해당 팩토리를 호출해 UIView 기반 네이티브 광고 뷰를 생성합니다.
 
 ```swift
 import cubid_flutter
