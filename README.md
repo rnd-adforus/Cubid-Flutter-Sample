@@ -65,6 +65,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 초기화 과정이 12초 이상 지연될 경우 초기화가 실패할 수 있습니다.
 
 ```dart
+  import 'package:cubid_flutter/cubid_flutter.dart';
   final cubidFlutter = CubidFlutter();
 
   cubidFlutter.initialize(
@@ -81,14 +82,14 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 ```
 
 ## 4. Flutter: 리워드 광고 (Rewarded Video Ad) <a id="chapter-4"></a>
-리워드 광고는 CubidReward 인스턴스를 통해 게재할 수 있습니다.
+리워드 광고는 CubidRewarded 인스턴스를 통해 게재할 수 있습니다.
 광고를 로드하려면 rewardAd.load() 메소드를 호출하세요.
 로드가 완료되면 Stream<CubidRewardedEvent>의 rewardAd.load() 콜백이 호출되며,
 이후 rewardAd.show()를 통해 광고를 표시할 수 있습니다.
 
 ```dart
   final cubidFlutter = CubidFlutter();
-  final rewardAd = cubidFlutter.createRewarded(placementId: "u365gjTAxA");
+  CubidRewarded rewardAd = cubidFlutter.createRewarded(placementId: "u365gjTAxA");
   rewardAd.events.listen((e) {
    switch (e.type) {
         case CubidRewardedEventType.clicked:
@@ -116,4 +117,41 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 
 리워드 광고를 표시하려면 먼저 광고 로드 및 콜백 리스너 설정을 완료한 뒤, rewardAd.load() 콜백을 수신해야 합니다.
 광고가 성공적으로 로드된 후에만 CubidRewarded 인스턴스의 rewardAd.show() 메소드를 호출할 수 있습니다.
+
+
+## 5. Flutter: 전면 광고 (Rewarded Video Ad) <a id="chapter-4"></a>
+전면 광고는 CubidInterstitial 인스턴스를 통해 게재할 수 있습니다.
+광고를 로드하려면 interstitial.load() 메소드를 호출하세요.
+로드가 완료되면 Stream<CubidInterstitialEvent>의 interstitial.load() 콜백이 호출되며,
+이후 interstitial.show()를 통해 광고를 표시할 수 있습니다.
+
+```dart
+  final cubidFlutter = CubidFlutter();
+  CubidInterstitial interstitial = cubidFlutter.createInterstitial(
+      placementId: "5jd1pALQ5Z",
+    );
+    interstitial!.events.listen((event) {
+     switch (event.type) {
+        case CubidInterstitialEventType.clicked:
+          break;
+        case CubidInterstitialEventType.loaded:
+          break;
+
+        case CubidInterstitialEventType.failed:
+          break;
+
+        case CubidInterstitialEventType.shown:
+          break;
+
+        case CubidInterstitialEventType.closed:
+          break;
+
+        case CubidInterstitialEventType.notLoaded:
+          break;
+      }
+    });
+
+  Future<void> loadInterstitial() => interstitial.load();
+  Future<void> showInterstitial() => interstitial.show();
+```
 
