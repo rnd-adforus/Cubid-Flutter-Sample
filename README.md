@@ -334,7 +334,7 @@ GADApplicationIdentifier는 Google Mobile Ads SDK 초기화 및 광고 요청을
 
 ```dart
   final cubidFlutter = CubidFlutter();
-  CubidRewarded rewardAd = cubidFlutter.createRewarded(placementId: "u365gjTAxA");
+  CubidRewarded rewardAd = cubidFlutter.createRewarded(placementId: "YOUR_PLACEMENT_ID");
   rewardAd.events.listen((e) {
    switch (e.type) {
         case CubidRewardedEventType.clicked:
@@ -373,7 +373,7 @@ GADApplicationIdentifier는 Google Mobile Ads SDK 초기화 및 광고 요청을
 ```dart
   final cubidFlutter = CubidFlutter();
   CubidInterstitial interstitial = cubidFlutter.createInterstitial(
-      placementId: "5jd1pALQ5Z",
+      placementId: "YOUR_PLACEMENT_ID",
     );
     interstitial!.events.listen((event) {
      switch (event.type) {
