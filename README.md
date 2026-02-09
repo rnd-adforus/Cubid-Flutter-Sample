@@ -15,7 +15,8 @@
 ##  바로가기
 1. [Android: Configuration 설정](#chapter-1)
 2. [Android: AndroidManifest.xml](#chapter-2)
-2. [Flutter: 플러그인 초기화](#chapter-3)
+3. [Flutter: 플러그인 초기화](#chapter-3)
+4. [Flutter: 리워드 광고 (Rewarded Video Ad)](#chapter-4)
 
 ## 1. Android: Configuration 설정 <a id="chapter-1"></a>
 pubspec.yaml 설정 파일에 플러그인 설정을 추가하여 주세요.
@@ -68,7 +69,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 
   cubidFlutter.initialize(
       setId: "SET_ID",  // 운영팀으로부터 발급받은 Set Id 입력
-      userId: "USER_ID,  // 사용자 고유 ID 또는 테스트용 ID
+      userId: "USER_ID",  // 사용자 고유 ID 또는 테스트용 ID
       onInitialized: (){
         // 초기화 성공
       },
@@ -79,6 +80,40 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 
 ```
 
+## 4. Flutter: 리워드 광고 (Rewarded Video Ad) <a id="chapter-4"></a>
+리워드 광고는 CubidReward 인스턴스를 통해 게재할 수 있습니다.
+광고를 로드하려면 rewardAd.load() 메소드를 호출하세요.
+로드가 완료되면 Stream<CubidRewardedEvent>의 rewardAd.load() 콜백이 호출되며,
+이후 rewardAd.show()를 통해 광고를 표시할 수 있습니다.
 
+```dart
+  final cubidFlutter = CubidFlutter();
+  final rewardAd = cubidFlutter.createRewarded(placementId: "u365gjTAxA");
+  rewardAd.events.listen((e) {
+   switch (e.type) {
+        case CubidRewardedEventType.clicked:
+          break;
+        case CubidRewardedEventType.loaded:
+          break;
+        case CubidRewardedEventType.failed:
+          break;
+        case CubidRewardedEventType.shown:
+          break;
+        case CubidRewardedEventType.skipped:
+          break;
+        case CubidRewardedEventType.completed:
+          break;
+        case CubidRewardedEventType.closed:
+          break;
+        case CubidRewardedEventType.notLoaded:
+          break;
+      }
+    });
+  Future<void> loadReward() => rewardAd.load(); 
+  Future<void> showReward() => rewardAd.show();
 
+```
+
+리워드 광고를 표시하려면 먼저 광고 로드 및 콜백 리스너 설정을 완료한 뒤, rewardAd.load() 콜백을 수신해야 합니다.
+광고가 성공적으로 로드된 후에만 CubidRewarded 인스턴스의 rewardAd.show() 메소드를 호출할 수 있습니다.
 
