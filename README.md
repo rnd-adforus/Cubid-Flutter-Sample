@@ -17,6 +17,8 @@
 2. [Android: AndroidManifest.xml](#chapter-2)
 3. [Flutter: 플러그인 초기화](#chapter-3)
 4. [Flutter: 리워드 광고 (Rewarded Video Ad)](#chapter-4)
+5. [Flutter: Flutter: 전면 광고 (Interstitial Ad](#chapter-5)
+6. [Flutter: Flutter: 배너 광고 (Banner Ad](#chapter-6)
 
 ## 1. Android: Configuration 설정 <a id="chapter-1"></a>
 pubspec.yaml 설정 파일에 플러그인 설정을 추가하여 주세요.
@@ -119,7 +121,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 광고가 성공적으로 로드된 후에만 CubidRewarded 인스턴스의 rewardAd.show() 메소드를 호출할 수 있습니다.
 
 
-## 5. Flutter: 전면 광고 (Rewarded Video Ad) <a id="chapter-4"></a>
+## 5. Flutter: 전면 광고 (Interstitial Ad) <a id="chapter-5"></a>
 전면 광고는 CubidInterstitial 인스턴스를 통해 게재할 수 있습니다.
 광고를 로드하려면 interstitial.load() 메소드를 호출하세요.
 로드가 완료되면 Stream<CubidInterstitialEvent>의 interstitial.load() 콜백이 호출되며,
@@ -155,3 +157,34 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
   Future<void> showInterstitial() => interstitial.show();
 ```
 
+## 6. Flutter: 배너 광고 (Banner Ad) <a id="chapter-6"></a>
+
+CubidBanner는 Flutter에서 사용하는 배너 광고 위젯이며, placementId와 size를 지정해 생성합니다.
+위젯이 빌드된 이후 내부적으로 광고 로드가 진행되고, 광고 로드가 완료되면 onLoaded 콜백 시점에 광고 콘텐츠가 자동으로 렌더링됩니다.
+광고가 실제 화면에 노출되는 시점에는 onPresent 콜백이 호출되며, 사용자가 광고를 클릭하면 onClick 콜백이 호출됩니다.
+광고 로드에 실패한 경우에는 onFailed 콜백을 통해 실패 사유를 전달받을 수 있습니다.
+
+### Flutter에서 제공되는 배너 사이즈는 다음과 같습니다.
+* CubidBannerSize.fixed300x250
+* CubidBannerSize.fixed320x100
+* CubidBannerSize.fixed320x50
+
+```dart
+  CubidBanner(
+        placementId: "YOUR_PLACEMENT_ID",
+        size: CubidBannerSize.fixed300x250,
+        onLoaded: () {
+          // 광고 로드 성공
+        },
+        onFailed: (failed) {
+          // 광고 로드 실패
+        },
+        onPresent: () {
+          // 광고 표시
+        },
+        onClick: () {
+          // 광고 클릭
+        },
+      ),
+```
+배너 광고는 일반 Flutter 위젯과 동일하게 레이아웃 트리에 포함시켜 사용하며, 별도의 로드 메서드를 호출할 필요 없이 CubidBanner 위젯이 화면에 추가되면 자동으로 광고 로드 및 표시 흐름이 처리됩니다.
