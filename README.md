@@ -34,9 +34,9 @@ dependencies:
 
 앱 수준의 build.gradle 또는 build.gradle.kts 파일에 Cubid SDK 및 필요한 Adapter SDK 의존성을 추가해 주세요. cubid 모듈은 필수(Core) 의존성이며, 광고 기능을 활성화하려면 adsu, cubex, upan 중 하나 이상의 Adapter 플러그인을 함께 추가해야 합니다.
 
-[adforus_uad_adapter 최신버전 ](https://pub.dev/packages/adforus_uad_adapter)
-[adforus_upan_adapter 최신버전 ](https://pub.dev/packages/adforus_upan_adapter)
-[adforus_cubex_adapter 최신버전 ](https://pub.dev/packages/adforus_cubex_adapter)
+* [adforus_uad_adapter 최신버전 ](https://pub.dev/packages/adforus_uad_adapter)
+* [adforus_upan_adapter 최신버전 ](https://pub.dev/packages/adforus_upan_adapter)
+* [adforus_cubex_adapter 최신버전 ](https://pub.dev/packages/adforus_cubex_adapter)
 
 ```yaml
 dependencies:
