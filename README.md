@@ -18,9 +18,9 @@
 3. [iOS: Info.plist 설정](#chapter-3)
 4. [Flutter: 플러그인 초기화](#chapter-4)
 5. [Flutter: 리워드 광고 (Rewarded Video Ad)](#chapter-5)
-6. [Flutter: Flutter: 전면 광고 (Interstitial Ad)](#chapter-6)
-7. [Flutter: Flutter: 배너 광고 (Banner Ad)](#chapter-7)
-8. [Flutter: Flutter: 네이티브 광고 (Native Ad)](#chapter-8)
+6. [Flutter: 전면 광고 (Interstitial Ad)](#chapter-6)
+7. [Flutter: 배너 광고 (Banner Ad)](#chapter-7)
+8. [Flutter: 네이티브 광고 (Native Ad)](#chapter-8)
 
 ## 1. Android: Configuration 설정 <a id="chapter-1"></a>
 pubspec.yaml 설정 파일에 플러그인 설정을 추가하여 주세요.
@@ -460,23 +460,42 @@ Flutter에서 지정한 컨테이너 크기는 Android XML 레이아웃 또는 i
 ## Native Ad Factory
 
 ### Android (Kotlin)
+
+CubidNativeAdFactory는 Android에서 네이티브 광고 뷰의 구조와 자산 매핑을 정의하는 인터페이스입니다.
+configure()는 네이티브 광고가 생성되기 전에 호출되며, 이 단계에서
+어떤 레이아웃을 사용할지와 그 레이아웃 안에서 어떤 View가 광고 자산에 대응되는지를 CubidNativeAdContext에 설정합니다.
+
+[native_ad_layout.xml 예시](https://github.com/rnd-adforus/Cubid-Flutter-Sample/blob/main/example/android/app/src/main/res/layout/native_ad_layout.xml)
+
+## 
+
 ```kotlin
   import com.adforus.cubid_flutter.nativead.CubidNativeAdContext
   import com.adforus.cubid_flutter.nativead.CubidNativeAdFactory
 
-  class YOUR_CLASS_NAME : CubidNativeAdFactory {
+  class AppNativeAdFactory : CubidNativeAdFactory {
 
     override fun configure(
         context: CubidNativeAdContext,
         options: Map<String, Any>?
     ) {
-
+        context.layoutResId = R.layout.native_ad_layout
+        context.mediaViewId = R.id.native_media
+        context.headlineViewId = R.id.native_headline
+        context.callToActionViewId = R.id.native_cta
+        context.iconViewId = R.id.native_icon
+        context.bodyViewId = R.id.native_body
     }
 }
 ```
 
 ### iOS (Swift)
 
+CubidNativeAdFactory는 iOS에서 네이티브 광고 뷰를 생성하는 팩토리 인터페이스입니다.
+create(context:options:)는 네이티브 광고가 로드될 때 호출되며, 이 메서드에서 광고를 표시할 UIView를 구성해 반환합니다.
+반환된 뷰는 네이티브 광고 컨테이너로 사용되며, 이후 SDK가 CubidNativeAdContext에 매핑된 요소들에 광고 자산을 바인딩합니다.
+
+[Swift UI 예시](https://github.com/rnd-adforus/Cubid-Flutter-Sample/blob/main/example/ios/Runner/ListTileNativeFactory.swift)
 ```swift
 import cubid_flutter
 
@@ -486,6 +505,11 @@ class YOUR_CLASS_NAME: NSObject, CubidNativeAdFactory {
     }
 }
 ```
+이 클래스의 역할은 다음으로 한정됩니다.
+네이티브 광고 레이아웃을 구성하는 UIView 생성
+광고 자산에 대응되는 뷰를 CubidNativeAdContext에 연결
+광고 로드, 노출, 클릭 처리 로직은 SDK 내부에서 처리되며,
+이 팩토리는 뷰 생성과 자산 매핑만 담당합니다.
 
       
 ## Native Registery Plugin
@@ -502,7 +526,7 @@ class MainActivity : FlutterActivity() {
 
         CubidFlutterPlugin.registerNativeAdFactory(
             "YOUR_NATIVE_FACTORY_ID",
-            YOUR_CLASS_NAME()
+            AppNativeAdFactory()
         )
     }
 }
