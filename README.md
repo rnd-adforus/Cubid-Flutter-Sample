@@ -17,8 +17,9 @@
 2. [Android: AndroidManifest.xml](#chapter-2)
 3. [Flutter: 플러그인 초기화](#chapter-3)
 4. [Flutter: 리워드 광고 (Rewarded Video Ad)](#chapter-4)
-5. [Flutter: Flutter: 전면 광고 (Interstitial Ad](#chapter-5)
-6. [Flutter: Flutter: 배너 광고 (Banner Ad](#chapter-6)
+5. [Flutter: Flutter: 전면 광고 (Interstitial Ad)](#chapter-5)
+6. [Flutter: Flutter: 배너 광고 (Banner Ad)](#chapter-6)
+7. [Flutter: Flutter: 네이티브 광고 (Native Ad)](#chapter-7)
 
 ## 1. Android: Configuration 설정 <a id="chapter-1"></a>
 pubspec.yaml 설정 파일에 플러그인 설정을 추가하여 주세요.
@@ -188,3 +189,118 @@ CubidBanner는 Flutter에서 사용하는 배너 광고 위젯이며, placementI
       ),
 ```
 배너 광고는 일반 Flutter 위젯과 동일하게 레이아웃 트리에 포함시켜 사용하며, 별도의 로드 메서드를 호출할 필요 없이 CubidBanner 위젯이 화면에 추가되면 자동으로 광고 로드 및 표시 흐름이 처리됩니다.
+
+## 7. Flutter: 네이티브 광고 (Native Ad) <a id="chapter-7"></a>
+CubidNativeAd는 Flutter에서 사용하는 네이티브 배너 광고 위젯이며, Android / iOS 네이티브 뷰를 플랫폼 뷰로 감싸서 표시합니다.
+네이티브 광고는 SDK가 높이를 결정하지 않으므로, Flutter 쪽에서 감싸는 컨테이너의 height를 명시적으로 지정해야 하며 이는 전적으로 개발자 책임입니다.
+
+CubidNativeAd가 위젯 트리에 추가되면 광고 로드가 자동으로 시작되고, 로드 완료 시 onLoaded 콜백이 호출됩니다.
+광고가 화면에 표시되면 onPresented, 클릭 시 onClicked, 로드 실패 시 onFailed 콜백이 호출됩니다.
+
+```dart
+   Container(
+          height: 315,
+          child: CubidNativeAd(
+            placementId: CubidConfig.nativeId,
+            factoryId: "YOUR_FACTORY_ID", //
+            onClicked: () {
+              print('CubidNative Clicked');
+            },
+            onFailed: (failed) {
+              print('CubidNative Failed');
+            },
+            onLoaded: () {
+              print('CubidNative loaded');
+            },
+            onPresented: () {
+              print('CubidNative Presented');
+            },
+          ),
+        ),
+```
+
+
+factoryId는 플랫폼별 네이티브 광고 레이아웃과 연결되며,
+Flutter에서 지정한 컨테이너 크기는 Android XML 레이아웃 또는 iOS Auto Layout으로 구성된 네이티브 광고 뷰의 실제 크기와 반드시 맞게 설계되어야 합니다.
+
+## Native Ad Factory
+
+### Android (Kotlin)
+```kotlin
+  import com.adforus.cubid_flutter.nativead.CubidNativeAdContext
+  import com.adforus.cubid_flutter.nativead.CubidNativeAdFactory
+
+  class YOUR_CLASS_NAME : CubidNativeAdFactory {
+
+    override fun configure(
+        context: CubidNativeAdContext,
+        options: Map<String, Any>?
+    ) {
+
+    }
+}
+```
+
+### iOS (Swift)
+
+```swift
+import cubid_flutter
+
+class ListTileNativeFactory: NSObject, CubidNativeAdFactory {
+    func create(context: CubidNativeAdContext, options: [String: Any]?) -> UIView {
+        return your_view
+    }
+}
+```
+
+      
+## Native Registery Plugin
+
+### Android (Kotlin)
+
+```kotlin
+import com.adforus.cubid_flutter.CubidFlutterPlugin
+
+class MainActivity : FlutterActivity() {
+
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+
+        CubidFlutterPlugin.registerNativeAdFactory(
+            "YOUR_NATIVE_FACTORY_ID",
+            YOUR_CLASS_NAME()
+        )
+    }
+}
+```
+
+### iOS (Swift)
+
+```swift
+import cubid_flutter
+import Flutter
+import UIKit
+
+@main
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    GeneratedPluginRegistrant.register(with: self)
+        CubidFlutterPlugin.registerNativeAdFactory(
+            factoryId: "YOUR_FACTORY_ID",
+            nativeAdFactory: YOUR_CLASS_FACTORY
+        )
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+}
+```
+
+
+
+
+
+
+
+   
