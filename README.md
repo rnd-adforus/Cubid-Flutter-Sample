@@ -286,7 +286,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 ### 사용자 추적 권한(ATT) 요청
 사용자 추적 허용을 통해 광고 품질을 높일 수 있습니다. 사용자 추적 권한에 필요한 NSUserTrackingUsageDescription을 설정은 다음과 같이 키를 추가하고 추적 목적을 명확히 설명하는 문구를 문자열 값으로 작성합니다. 아래는 문구는 예시이며, 앱 내 알맞는 문구로 작성해주세요
 
-```plist
+```xml
 <key>NSUserTrackingUsageDescription</key>
 <string>서비스 품질 향상과 맞춤형 콘텐츠 제공을 위해 사용자의 기기 정보를 활용합니다.</string>
 ```
@@ -295,7 +295,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 
 GADApplicationIdentifier는 Google Mobile Ads SDK 초기화 및 광고 요청을 위해 필수이며, 미설정 시 광고 로드가 실패할 수 있습니다. Info.plist에 다음과 같이 작성하여주세요. 앱별로 해당하는 고유한 값을 애드포러스 "플랫폼3팀"에 문의해주세요.
 
-```plist
+```xml
 <key>GADApplicationIdentifier</key>
 <string>ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx</string>
 ```
