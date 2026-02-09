@@ -65,7 +65,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 ### SDKAdNetwork ID 설정
 일부 광고 소재에서는 광고 전환에 사용되는 SDKAdNetwork ID를 필요로 합니다. Info.plist 내 SKAdNetworkItems 키값으로 ID 배열을 다음과 같이 설정해주세요.
 
-<details><br>
+<SkadNetworks><br>
 <summary><b>작성예시</summary>
 
 ```xml
