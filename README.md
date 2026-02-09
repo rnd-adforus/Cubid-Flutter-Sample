@@ -25,7 +25,7 @@
 ## 1. Android: Configuration 설정 <a id="chapter-1"></a>
 pubspec.yaml 설정 파일에 플러그인 설정을 추가하여 주세요.
 
-[cubid_flutter 최신버전 ](https://pub.dev/packages/cubid_flutter)
+* [cubid_flutter 최신버전 ](https://pub.dev/packages/cubid_flutter)
 
 ```yaml
 dependencies:
