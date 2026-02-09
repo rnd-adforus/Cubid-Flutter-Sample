@@ -15,11 +15,12 @@
 ##  바로가기
 1. [Android: Configuration 설정](#chapter-1)
 2. [Android: AndroidManifest.xml](#chapter-2)
-3. [Flutter: 플러그인 초기화](#chapter-3)
-4. [Flutter: 리워드 광고 (Rewarded Video Ad)](#chapter-4)
-5. [Flutter: Flutter: 전면 광고 (Interstitial Ad)](#chapter-5)
-6. [Flutter: Flutter: 배너 광고 (Banner Ad)](#chapter-6)
-7. [Flutter: Flutter: 네이티브 광고 (Native Ad)](#chapter-7)
+3. [iOS: Info.plist 설정](#chapter-3)
+4. [Flutter: 플러그인 초기화](#chapter-4)
+5. [Flutter: 리워드 광고 (Rewarded Video Ad)](#chapter-5)
+6. [Flutter: Flutter: 전면 광고 (Interstitial Ad)](#chapter-6)
+7. [Flutter: Flutter: 배너 광고 (Banner Ad)](#chapter-7)
+8. [Flutter: Flutter: 네이티브 광고 (Native Ad)](#chapter-8)
 
 ## 1. Android: Configuration 설정 <a id="chapter-1"></a>
 pubspec.yaml 설정 파일에 플러그인 설정을 추가하여 주세요.
@@ -59,7 +60,240 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 ```
 
 
-## 3. Flutter: Plugin 초기화 <a id="chapter-3"></a>
+## 3. iOS:  iOS: Info.plist 설정 <a id="chapter-3"></a>
+
+### SDKAdNetwork ID 설정
+일부 광고 소재에서는 광고 전환에 사용되는 SDKAdNetwork ID를 필요로 합니다. Info.plist 내 SKAdNetworkItems 키값으로 ID 배열을 다음과 같이 설정해주세요.
+
+<details><br>
+<summary><b>작성예시</summary>
+
+```xml
+<key>SKAdNetworkItems</key>
+<array>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>cstr6suwn9.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>4fzdc2evr5.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>4pfyvq9l8r.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>2fnua5tdw4.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ydx93a7ass.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>5a6flpkh64.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>p78axxw29g.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>v72qych5uu.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ludvb6z3bs.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>cp8zw746q7.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>3sh42y64q3.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>c6k4g5qg8m.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>s39g8k73mm.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>3qy4746246.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>f38h382jlk.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>hs6bdukanm.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+	<string>v4nxqhlyqp.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>wzmmz9fp6w.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>yclnxrl5pm.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>t38b2kh725.skadnetwork</string>
+  </dict>
+  <dict>
+	<key>SKAdNetworkIdentifier</key>
+	<string>7ug5zh24hu.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>gta9lk7p23.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>vutu7akeur.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>y5ghdn5j9k.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>n6fk4nfna4.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>v9wttpbfk9.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>n38lu8286q.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>47vhws6wlr.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>kbd757ywx3.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>9t245vhmpl.skadnetwork</string>
+  </dict>
+  <dict>
+	<key>SKAdNetworkIdentifier</key>
+	<string>eh6m2bh4zr.skadnetwork</string>
+  </dict>
+  <dict>
+	<key>SKAdNetworkIdentifier</key>
+	<string>a2p9lx4jpn.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>22mmun2rn5.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>4468km3ulz.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>2u9pt9hc89.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>8s468mfl3y.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>klf5c3l5u5.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ppxm28t8ap.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ecpz2srf59.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>uw77j35x4d.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>pwa73g5rt2.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+	 <string>mlmmfzh3r3.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>578prtvx9j.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>4dzt52r2t5.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>e5fvkxwrpn.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>8c4e2ghe7u.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>zq492l623r.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>3rd42ekr43.skadnetwork</string>
+  </dict>
+  <dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>3qcr597p9d.skadnetwork</string>
+  </dict>
+</array>
+```
+<br>
+</details>
+<br>
+</details>
+
+
+### 사용자 추적 권한(ATT) 요청
+사용자 추적 허용을 통해 광고 품질을 높일 수 있습니다. 사용자 추적 권한에 필요한 NSUserTrackingUsageDescription을 설정은 다음과 같이 키를 추가하고 추적 목적을 명확히 설명하는 문구를 문자열 값으로 작성합니다. 아래는 문구는 예시이며, 앱 내 알맞는 문구로 작성해주세요
+
+```plist
+<key>NSUserTrackingUsageDescription</key>
+<string>서비스 품질 향상과 맞춤형 콘텐츠 제공을 위해 사용자의 기기 정보를 활용합니다.</string>
+```
+
+### GADApplicationIdentifier 설정
+
+GADApplicationIdentifier는 Google Mobile Ads SDK 초기화 및 광고 요청을 위해 필수이며, 미설정 시 광고 로드가 실패할 수 있습니다. Info.plist에 다음과 같이 작성하여주세요. 앱별로 해당하는 고유한 값을 애드포러스 "플랫폼3팀"에 문의해주세요.
+
+```plist
+<key>GADApplicationIdentifier</key>
+<string>ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx</string>
+```
+
+
+## 4. Flutter: Plugin 초기화 <a id="chapter-4"></a>
 
 광고를 호출하기 전에 반드시 cubidFlutter.initialize() 메서드를 호출하여 플러그인를 초기화해야 합니다.
 이 메서드는 플러그인 초기화를 수행하며, 성공 또는 실패 여부를 콜백을 통해 전달합니다.
@@ -84,7 +318,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 
 ```
 
-## 4. Flutter: 리워드 광고 (Rewarded Video Ad) <a id="chapter-4"></a>
+## 5. Flutter: 리워드 광고 (Rewarded Video Ad) <a id="chapter-5"></a>
 리워드 광고는 CubidRewarded 인스턴스를 통해 게재할 수 있습니다.
 광고를 로드하려면 rewardAd.load() 메소드를 호출하세요.
 로드가 완료되면 Stream<CubidRewardedEvent>의 rewardAd.load() 콜백이 호출되며,
@@ -122,7 +356,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
 광고가 성공적으로 로드된 후에만 CubidRewarded 인스턴스의 rewardAd.show() 메소드를 호출할 수 있습니다.
 
 
-## 5. Flutter: 전면 광고 (Interstitial Ad) <a id="chapter-5"></a>
+## 6. Flutter: 전면 광고 (Interstitial Ad) <a id="chapter-6"></a>
 전면 광고는 CubidInterstitial 인스턴스를 통해 게재할 수 있습니다.
 광고를 로드하려면 interstitial.load() 메소드를 호출하세요.
 로드가 완료되면 Stream<CubidInterstitialEvent>의 interstitial.load() 콜백이 호출되며,
@@ -158,7 +392,7 @@ adsu 모듈을 사용하는 경우, 앱의 AndroidManifest.xml 파일에 반드�
   Future<void> showInterstitial() => interstitial.show();
 ```
 
-## 6. Flutter: 배너 광고 (Banner Ad) <a id="chapter-6"></a>
+## 7. Flutter: 배너 광고 (Banner Ad) <a id="chapter-7"></a>
 
 CubidBanner는 Flutter에서 사용하는 배너 광고 위젯이며, placementId와 size를 지정해 생성합니다.
 위젯이 빌드된 이후 내부적으로 광고 로드가 진행되고, 광고 로드가 완료되면 onLoaded 콜백 시점에 광고 콘텐츠가 자동으로 렌더링됩니다.
@@ -190,7 +424,7 @@ CubidBanner는 Flutter에서 사용하는 배너 광고 위젯이며, placementI
 ```
 배너 광고는 일반 Flutter 위젯과 동일하게 레이아웃 트리에 포함시켜 사용하며, 별도의 로드 메서드를 호출할 필요 없이 CubidBanner 위젯이 화면에 추가되면 자동으로 광고 로드 및 표시 흐름이 처리됩니다.
 
-## 7. Flutter: 네이티브 광고 (Native Ad) <a id="chapter-7"></a>
+## 8. Flutter: 네이티브 광고 (Native Ad) <a id="chapter-8"></a>
 CubidNativeAd는 Flutter에서 사용하는 네이티브 배너 광고 위젯이며, Android / iOS 네이티브 뷰를 플랫폼 뷰로 감싸서 표시합니다.
 네이티브 광고는 SDK가 높이를 결정하지 않으므로, Flutter 쪽에서 감싸는 컨테이너의 height를 명시적으로 지정해야 하며 이는 전적으로 개발자 책임입니다.
 
@@ -246,7 +480,7 @@ Flutter에서 지정한 컨테이너 크기는 Android XML 레이아웃 또는 i
 ```swift
 import cubid_flutter
 
-class ListTileNativeFactory: NSObject, CubidNativeAdFactory {
+class YOUR_CLASS_NAME: NSObject, CubidNativeAdFactory {
     func create(context: CubidNativeAdContext, options: [String: Any]?) -> UIView {
         return your_view
     }
@@ -289,8 +523,8 @@ import UIKit
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
         CubidFlutterPlugin.registerNativeAdFactory(
-            factoryId: "YOUR_FACTORY_ID",
-            nativeAdFactory: YOUR_CLASS_FACTORY
+            factoryId: "YOUR_NATIVE_FACTORY_ID",
+            nativeAdFactory: YOUR_CLASS_NAME
         )
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
