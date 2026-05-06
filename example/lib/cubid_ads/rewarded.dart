@@ -98,6 +98,24 @@ class _CubidRewardedVideoAdSampleTabState
     rewardAd!.events.listen((e) {
       setState(() => rewardAEvent = e.type);
       print('Cubid [Reward Event] ${e.type}');
+      switch (e.type) {
+        case CubidRewardedEventType.clicked:
+          break;
+        case CubidRewardedEventType.loaded:
+          break;
+        case CubidRewardedEventType.failed:
+          break;
+        case CubidRewardedEventType.shown:
+          break;
+        case CubidRewardedEventType.skipped:
+          break;
+        case CubidRewardedEventType.completed:
+          break;
+        case CubidRewardedEventType.closed:
+          break;
+        case CubidRewardedEventType.notLoaded:
+          break;
+      }
     });
   }
 

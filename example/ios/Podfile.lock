@@ -1,47 +1,45 @@
 PODS:
-  - Ads-Global (7.8.5.5):
-    - Ads-Global/BUAdSDK (= 7.8.5.5)
-  - Ads-Global/BUAdSDK (7.8.5.5):
+  - adforus_cubex_adapter (0.0.1):
+    - CubeXKit (= 1.1.2)
+    - Flutter
+  - adforus_uad_adapter (1.0.3):
+    - Flutter
+    - UAdKit (= 2.5.0)
+  - adforus_upan_adapter (1.0.0):
+    - Flutter
+    - UPanKit (= 1.5.1)
+  - Ads-Global (7.9.0.8):
+    - Ads-Global/BUAdSDK (= 7.9.0.8)
+  - Ads-Global/BUAdSDK (7.9.0.8):
     - Ads-Global/PangleSDK
     - Ads-Global/TikTokBusinessSDK
-  - Ads-Global/PangleSDK (7.8.5.5)
-  - Ads-Global/TikTokBusinessSDK (7.8.5.5)
-  - CubeXKit (0.0.13)
+  - Ads-Global/PangleSDK (7.9.0.8)
+  - Ads-Global/TikTokBusinessSDK (7.9.0.8)
+  - CubeXKit (1.1.2)
   - cubid_flutter (0.0.1):
-    - CubeXKit (= 0.0.13)
-    - CuBidKit (= 1.1.0)
+    - CuBidKit (= 1.2.1)
     - Flutter
-    - UAdKit (= 0.0.29)
-    - UPanKit (= 0.0.11)
-  - CuBidKit (1.1.0)
+  - CuBidKit (1.2.1)
   - Flutter (1.0.0)
-  - Google-Mobile-Ads-SDK (12.14.0):
+  - Google-Mobile-Ads-SDK (13.0.0):
     - GoogleUserMessagingPlatform (>= 1.1)
-  - google_mobile_ads (7.0.0):
-    - Flutter
-    - Google-Mobile-Ads-SDK (~> 12.14.0)
-    - webview_flutter_wkwebview
-  - GoogleMobileAdsMediationPangle (7.8.5.5.0):
-    - Ads-Global (= 7.8.5.5)
-    - Google-Mobile-Ads-SDK (~> 12.0)
   - GoogleUserMessagingPlatform (3.1.0)
   - integration_test (0.0.1):
     - Flutter
-  - UAdKit (0.0.29):
-    - Google-Mobile-Ads-SDK (< 12.14.1, >= 12.2.0)
-    - GoogleMobileAdsMediationPangle (< 7.8.5.5.1, >= 6.4.1.2.1)
-  - UPanKit (0.0.11):
-    - Ads-Global (< 7.8.5.6, >= 6.4.1.2)
-  - webview_flutter_wkwebview (0.0.1):
-    - Flutter
-    - FlutterMacOS
+  - UAdKit (2.5.0):
+    - Google-Mobile-Ads-SDK (< 13.0.1, >= 12.4.0)
+  - UPanKit (1.5.1):
+    - UPanKit/Core (= 1.5.1)
+  - UPanKit/Core (1.5.1):
+    - Ads-Global (< 7.9.0.9, >= 7.8.5.6)
 
 DEPENDENCIES:
+  - adforus_cubex_adapter (from `.symlinks/plugins/adforus_cubex_adapter/ios`)
+  - adforus_uad_adapter (from `.symlinks/plugins/adforus_uad_adapter/ios`)
+  - adforus_upan_adapter (from `.symlinks/plugins/adforus_upan_adapter/ios`)
   - cubid_flutter (from `.symlinks/plugins/cubid_flutter/ios`)
   - Flutter (from `Flutter`)
-  - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
-  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
 
 SPEC REPOS:
   trunk:
@@ -49,37 +47,38 @@ SPEC REPOS:
     - CubeXKit
     - CuBidKit
     - Google-Mobile-Ads-SDK
-    - GoogleMobileAdsMediationPangle
     - GoogleUserMessagingPlatform
     - UAdKit
     - UPanKit
 
 EXTERNAL SOURCES:
+  adforus_cubex_adapter:
+    :path: ".symlinks/plugins/adforus_cubex_adapter/ios"
+  adforus_uad_adapter:
+    :path: ".symlinks/plugins/adforus_uad_adapter/ios"
+  adforus_upan_adapter:
+    :path: ".symlinks/plugins/adforus_upan_adapter/ios"
   cubid_flutter:
     :path: ".symlinks/plugins/cubid_flutter/ios"
   Flutter:
     :path: Flutter
-  google_mobile_ads:
-    :path: ".symlinks/plugins/google_mobile_ads/ios"
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
-  webview_flutter_wkwebview:
-    :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
 
 SPEC CHECKSUMS:
-  Ads-Global: c9bbbcad7464172eb7005a4ad3e0d24b819de0a7
-  CubeXKit: 0512d75d65a9007e1bb69a175b5a25e163755d22
-  cubid_flutter: 8906c96430bdbe04d01be8dfe3048af6ad9481f6
-  CuBidKit: 62085e17df11750a5e12e7bde6d640b0a4d2433e
+  adforus_cubex_adapter: d6a908a5350843d8140ff369c59f3fa9f944af63
+  adforus_uad_adapter: 62c76fb9996c873ff3a5d1b65930b45269458286
+  adforus_upan_adapter: cfccb81c230e7c301f211558b8ec092cb43157af
+  Ads-Global: b21f686881cc572879a107860aaab40c811e60a0
+  CubeXKit: 20fc42a72125a181c6d7862ef168131c45e126a1
+  cubid_flutter: 6406a7d89a29c3ccd900a54c41afb510a302e2e4
+  CuBidKit: 03ae36f1e8674fa1968d5d1409c8ba6b0203fefc
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  Google-Mobile-Ads-SDK: 4534fd2dfcd3f705c5485a6633c5188d03d4eed2
-  google_mobile_ads: df3008bafbe1f2ad6862f87334e560d2f047f902
-  GoogleMobileAdsMediationPangle: 9c9c8cef109faf23dccf7412bda43d7b41063006
+  Google-Mobile-Ads-SDK: 96498d53355e438e2d932277e5e8e41a824fe4d4
   GoogleUserMessagingPlatform: befe603da6501006420c206222acd449bba45a9c
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
-  UAdKit: a25e2b86cf9a63012a9bfd8d637ea785e514340a
-  UPanKit: e9671299a631709036970b29c3fc0cab7d9eb20e
-  webview_flutter_wkwebview: 8ebf4fded22593026f7dbff1fbff31ea98573c8d
+  UAdKit: 0b064eb0c36e912fa6ac822a30033af86cc758f0
+  UPanKit: c2d250f63a7d775ffe9fcfe6ca7fdd23e9fb1fbd
 
 PODFILE CHECKSUM: 1b4e38c5a7977b1d2784dfb12c349b2547df92da
 

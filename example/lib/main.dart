@@ -6,7 +6,11 @@ import 'package:cubid_flutter_example/cubid_ads/rewarded.dart';
 import 'package:cubid_flutter_example/cubid_config.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+//Your User Id
+final String _userId = "user1234";
+String _errorMessage = "";
+final cubidFlutter = CubidFlutter();
+void main() async {
   runApp(const MyApp());
 }
 
@@ -18,24 +22,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //Your User Id
-  final String _userId = "user1234";
-  String _errorMessage = "";
-  final cubidFlutter = CubidFlutter();
-
   @override
   void initState() {
     super.initState();
     _initializeCubid();
   }
 
-  void _initializeCubid() {
+  Future<void> _initializeCubid() async {
     cubidFlutter.initialize(
       setId: CubidConfig.appId,
       userId: _userId,
       onInitialized: _onInitialized,
       onFailed: _onFailed,
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void _onInitialized() {
@@ -45,11 +49,7 @@ class _MyAppState extends State<MyApp> {
 
   void _onFailed(String errorMessage) {
     debugPrint("Cubid Init Failed $errorMessage");
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    setState(() {});
   }
 
   @override

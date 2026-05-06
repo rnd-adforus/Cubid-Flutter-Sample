@@ -101,7 +101,24 @@ class _CubidInterstitialSampleTabState
     );
     interstitial!.events.listen((event) {
       setState(() => interstitialEvent = event.type);
-      print('Cubid [Interstitial Event] ${event.type}');
+      switch (event.type) {
+        case CubidInterstitialEventType.clicked:
+          break;
+        case CubidInterstitialEventType.loaded:
+          break;
+
+        case CubidInterstitialEventType.failed:
+          break;
+
+        case CubidInterstitialEventType.shown:
+          break;
+
+        case CubidInterstitialEventType.closed:
+          break;
+
+        case CubidInterstitialEventType.notLoaded:
+          break;
+      }
     });
     setState(() {
       _isInitialized = _isInitialized;
