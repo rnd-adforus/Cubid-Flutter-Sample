@@ -34,6 +34,12 @@ dependencies:
 
 앱 수준의 build.gradle 또는 build.gradle.kts 파일에 Cubid SDK 및 필요한 Adapter SDK 의존성을 추가해 주세요. cubid 모듈은 필수(Core) 의존성이며, 광고 기능을 활성화하려면 adsu, cubex, upan 중 하나 이상의 Adapter 플러그인을 함께 추가해야 합니다.
 
+어댑터 구성 요소:
+
+*adforus_uad_adapter: Admob 광고 연동을 위한 메인 어댑터 SDK
+*upan: Pangle 광고 연동을 위한 어댑터 SDK
+*cubex: 자사 RTB 광고 연동을 위한 어댑터 SDK
+
 * [adforus_uad_adapter 최신버전 ](https://pub.dev/packages/adforus_uad_adapter)
 * [adforus_upan_adapter 최신버전 ](https://pub.dev/packages/adforus_upan_adapter)
 * [adforus_cubex_adapter 최신버전 ](https://pub.dev/packages/adforus_cubex_adapter)
