@@ -46,6 +46,7 @@ dependencies:
   adforus_uad_adapter: ^x.y.z // Adapter Module
   adforus_upan_adapter: ^x.y.z // Adapter Module
   adforus_cubex_adapter: ^x.y.z // Adapter Module
+  adforus_ual_adapter: ^x.y.z // Adapter Module
 ```
 
 
