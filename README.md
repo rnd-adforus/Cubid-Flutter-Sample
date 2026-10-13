@@ -72,16 +72,19 @@ dependencies:
 
 앱 수준의 build.gradle 또는 build.gradle.kts 파일에 Cubid SDK 및 필요한 Adapter SDK 의존성을 추가해 주세요. cubid 모듈은 필수(Core) 의존성이며, 광고 기능을 활성화하려면 adsu, cubex, upan 중 하나 이상의 Adapter 플러그인을 함께 추가해야 합니다.
 
-* [adforus_uad_adapter 최신버전 ](https://pub.dev/packages/adforus_uad_adapter)
-* [adforus_upan_adapter 최신버전 ](https://pub.dev/packages/adforus_upan_adapter)
-* [adforus_cubex_adapter 최신버전 ](https://pub.dev/packages/adforus_cubex_adapter)
+어댑터 구성 요소:
 
+* adforus_uad_adapter: Admob 광고 연동을 위한 메인 어댑터 SDK [adforus_uad_adapter 최신버전 ](https://pub.dev/packages/adforus_uad_adapter)
+* upan: Pangle 광고 연동을 위한 어댑터 SDK [adforus_upan_adapter 최신버전 ](https://pub.dev/packages/adforus_upan_adapter)
+* cubex: 자사 RTB 광고 연동을 위한 어댑터 SDK [adforus_cubex_adapter 최신버전 ](https://pub.dev/packages/adforus_cubex_adapter)
+* ual: Approving 광고 연동을 위한 어댑터 SDK [adforus_ual_adapter 최신버전 ](https://pub.dev/packages/adforus_ual_adapter)
 ```yaml
 dependencies:
   cubid_flutter: ^x.y.z // Core Module - required
   adforus_uad_adapter: ^x.y.z // Adapter Module
   adforus_upan_adapter: ^x.y.z // Adapter Module
   adforus_cubex_adapter: ^x.y.z // Adapter Module
+  adforus_ual_adapter: ^x.y.z // Adapter Module
 ```
 
 
@@ -357,18 +360,30 @@ GADApplicationIdentifier는 Google Mobile Ads SDK 초기화 및 광고 요청을
       onInitialized: (){
         // 초기화 성공
       },
-      onFailed: (String error){
-        // 초기화 실패
+      onFailed: (CubidError error){
+        // 초기화 실패 - error.code / error.message 로 원인 확인
       },
     );
 
 ```
 
+초기화가 완료되기 전에는 광고 인스턴스를 생성하지 마세요.
+플러그인은 생성 → 로드 → 표시 → 해제 순서를 내부적으로 보장하지만,
+SDK 초기화 자체는 기다려 주지 않습니다. 즉 순서를 직접 지켜야 하는 유일한 구간입니다.
+
+`onInitialized` 콜백을 사용하거나, 아래와 같이 상태 값으로 확인할 수 있습니다.
+
+```dart
+  if (cubidFlutter.initializationStatus == CubidInitState.initialized) {
+    // 이 시점부터 광고 생성 가능
+  }
+```
+
 ## 5. Flutter: 리워드 광고 (Rewarded Video Ad) <a id="chapter-5"></a>
 리워드 광고는 CubidRewarded 인스턴스를 통해 게재할 수 있습니다.
-광고를 로드하려면 rewardAd.load() 메소드를 호출하세요.
-로드가 완료되면 Stream<CubidRewardedEvent>의 rewardAd.load() 콜백이 호출되며,
-이후 rewardAd.show()를 통해 광고를 표시할 수 있습니다.
+인스턴스를 생성한 뒤 바로 `rewardAd.load()`를 호출하면 되며, 그 사이에 `await`를 넣을 필요가 없습니다.
+`load()`, `show()`, `dispose()`는 모두 네이티브 인스턴스 생성이 끝난 뒤에 실행되도록 순서가 보장됩니다.
+로드 결과는 `Stream<CubidRewardedEvent>`로 전달되며, `loaded` 수신 후 `rewardAd.show()`로 광고를 표시합니다.
 
 ```dart
   final cubidFlutter = CubidFlutter();
@@ -393,20 +408,52 @@ GADApplicationIdentifier는 Google Mobile Ads SDK 초기화 및 광고 요청을
           break;
       }
     });
-  Future<void> loadReward() => rewardAd.load(); 
+  // 생성 직후 바로 호출해도 안전합니다.
+  rewardAd.load();
+
+  Future<void> loadReward() => rewardAd.load();
   Future<void> showReward() => rewardAd.show();
+
+  // 더 이상 사용하지 않을 때 해제합니다. (예: State.dispose)
+  Future<void> disposeReward() => rewardAd.dispose();
 
 ```
 
-리워드 광고를 표시하려면 먼저 광고 로드 및 콜백 리스너 설정을 완료한 뒤, rewardAd.load() 콜백을 수신해야 합니다.
-광고가 성공적으로 로드된 후에만 CubidRewarded 인스턴스의 rewardAd.show() 메소드를 호출할 수 있습니다.
+광고를 표시하려면 `loaded` 이벤트를 수신한 뒤에 `rewardAd.show()`를 호출해야 합니다.
+
+### 인스턴스 생명주기와 이벤트
+
+**1. `load()`의 Future는 "광고 준비 완료"가 아닙니다.**
+Future가 완료되었다는 것은 플랫폼이 요청을 정상적으로 접수했다는 의미이며,
+실제 결과는 항상 `events` 스트림의 `loaded` 또는 `failed`로 전달됩니다.
+`load()`가 예외를 던지는 경우는 네이티브 인스턴스 자체를 생성하지 못했을 때뿐입니다.
+
+**2. 이벤트는 버퍼링됩니다.**
+`load()`를 먼저 호출하고 나중에 `events`를 구독해도 이벤트를 놓치지 않습니다.
+구독 전에 발생한 이벤트는 보관되었다가 첫 구독 시점에 전달됩니다.
+
+**3. `ready`는 선택 사항입니다.**
+네이티브 인스턴스 생성 자체를 확인하고 싶을 때만 사용하며,
+`load()` 전에 `await` 할 필요는 없습니다. 생성에 실패하면 오류를 던집니다.
+
+```dart
+  await rewardAd.ready; // 네이티브 인스턴스 생성 완료 (생성 실패 시 예외)
+```
+
+**4. `dispose()`는 언제 호출해도 안전합니다.**
+생성이 아직 진행 중이더라도 그 뒤에 순서대로 실행되므로 경합이 발생하지 않습니다.
+
+> ⚠️ 일부 미디에이션 네트워크에서는 광고 종료 시 `closed`가 전달되지 않고
+> `completed`(또는 `skipped`)로 끝나는 경우가 있습니다.
+> 화면 복귀나 보상 지급 처리를 `closed`에만 의존하지 말고
+> `completed` / `skipped`를 기준으로 처리하세요.
 
 
 ## 6. Flutter: 전면 광고 (Interstitial Ad) <a id="chapter-6"></a>
 전면 광고는 CubidInterstitial 인스턴스를 통해 게재할 수 있습니다.
-광고를 로드하려면 interstitial.load() 메소드를 호출하세요.
-로드가 완료되면 Stream<CubidInterstitialEvent>의 interstitial.load() 콜백이 호출되며,
-이후 interstitial.show()를 통해 광고를 표시할 수 있습니다.
+리워드 광고와 동일하게, 인스턴스를 생성한 직후 바로 `interstitial.load()`를 호출할 수 있으며
+`load()`, `show()`, `dispose()`는 네이티브 인스턴스 생성 이후 순서대로 실행됩니다.
+로드 결과는 `Stream<CubidInterstitialEvent>`로 전달되며, `loaded` 수신 후 `interstitial.show()`로 표시합니다.
 
 ```dart
   final cubidFlutter = CubidFlutter();
@@ -434,8 +481,27 @@ GADApplicationIdentifier는 Google Mobile Ads SDK 초기화 및 광고 요청을
       }
     });
 
+  // 생성 직후 바로 호출해도 안전합니다.
+  interstitial.load();
+
   Future<void> loadInterstitial() => interstitial.load();
   Future<void> showInterstitial() => interstitial.show();
+
+  // 더 이상 사용하지 않을 때 해제합니다. (예: State.dispose)
+  Future<void> disposeInterstitial() => interstitial.dispose();
+```
+
+### 인스턴스 생명주기와 이벤트
+
+리워드 광고와 동작이 동일합니다.
+
+* `load()`의 Future 완료는 "요청 접수"를 의미하며, 실제 결과는 `events`의 `loaded` / `failed`로 전달됩니다.
+* 구독 전에 발생한 이벤트는 버퍼링되므로, `load()` 이후에 `events`를 구독해도 놓치지 않습니다.
+* `await interstitial.ready`로 네이티브 인스턴스 생성 여부를 확인할 수 있으나 필수는 아닙니다.
+* `dispose()`는 생성이 진행 중인 상태에서 호출해도 안전합니다.
+
+```dart
+  await interstitial.ready; // 네이티브 인스턴스 생성 완료 (생성 실패 시 예외)
 ```
 
 ## 7. Flutter: 배너 광고 (Banner Ad) <a id="chapter-7"></a>
