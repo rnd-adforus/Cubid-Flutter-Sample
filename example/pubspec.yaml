@@ -16,7 +16,7 @@ dependencies:
   adforus_upan_adapter: ^1.3.0
   adforus_cubex_adapter: ^1.4.0
   #The Main Plugin
-  cubid_flutter: ^1.0.0
+  cubid_flutter: ^2.0.1
 
 
 dev_dependencies:
