@@ -44,12 +44,14 @@ class _MyAppState extends State<MyApp> {
 
   void _onInitialized() {
     debugPrint("Cubid Init Success");
+    if (!mounted) return;
     setState(() {});
   }
 
-  void _onFailed(String errorMessage) {
-    debugPrint("Cubid Init Failed $errorMessage");
-    setState(() {});
+  void _onFailed(CubidError error) {
+    debugPrint("Cubid Init Failed $error");
+    if (!mounted) return;
+    setState(() => _errorMessage = error.message);
   }
 
   @override

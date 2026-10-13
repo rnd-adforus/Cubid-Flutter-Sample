@@ -23,7 +23,7 @@ class CubidNativeBannerSampleTab extends StatelessWidget {
               print('CubidNative Clicked');
             },
             onFailed: (failed) {
-              print('CubidNative Failed');
+              debugPrint('CubidNative Failed $failed');
             },
             onLoaded: () {
               print('CubidNative loaded');

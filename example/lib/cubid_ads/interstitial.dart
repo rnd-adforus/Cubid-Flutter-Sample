@@ -100,6 +100,7 @@ class _CubidInterstitialSampleTabState
       placementId: CubidConfig.interstitialId,
     );
     interstitial!.events.listen((event) {
+      debugPrint('Cubid [Interstitial Event] ${event.type} ${event.error ?? ""}');
       setState(() => interstitialEvent = event.type);
       switch (event.type) {
         case CubidInterstitialEventType.clicked:

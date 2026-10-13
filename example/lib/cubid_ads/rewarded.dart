@@ -97,7 +97,7 @@ class _CubidRewardedVideoAdSampleTabState
     rewardAd = cubidFlutter.createRewarded(placementId: CubidConfig.rewardedId);
     rewardAd!.events.listen((e) {
       setState(() => rewardAEvent = e.type);
-      print('Cubid [Reward Event] ${e.type}');
+      debugPrint('Cubid [Reward Event] ${e.type} ${e.error ?? ""}');
       switch (e.type) {
         case CubidRewardedEventType.clicked:
           break;

@@ -5,26 +5,34 @@ packages:
     dependency: "direct main"
     description:
       name: adforus_cubex_adapter
-      sha256: a3e8dca04877c9eec064ac2d1844bac63501768c3ddcd13f52fa518922d5e112
+      sha256: "002ca289558004e3a15b29eee23767756ead6458701221b689b9b93c5e6dee2b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.4.0"
   adforus_uad_adapter:
     dependency: "direct main"
     description:
       name: adforus_uad_adapter
-      sha256: "85e836e47f75b8d19a489160b585465349547a35f49600d3434b5ee8331951e9"
+      sha256: "63d2468bc2d6886a47299fa87a031248d222c09266bd87c1bd37d1771433e465"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
+  adforus_ual_adapter:
+    dependency: "direct main"
+    description:
+      name: adforus_ual_adapter
+      sha256: "2bf9697cbc7c702009c61557e27893f36933af63ab383bb9b252162d74d4022b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   adforus_upan_adapter:
     dependency: "direct main"
     description:
       name: adforus_upan_adapter
-      sha256: "08c98c23d5b3e7042dff3d56defe247a93781f5afd359ce7a18f755cd7ef6f5e"
+      sha256: "7d8f9adfeebc67c529fb6d73a21275bf84244536511435ee0dc2ce40cf7ee2da"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.3.0"
   async:
     dependency: transitive
     description:
@@ -69,10 +77,10 @@ packages:
     dependency: "direct main"
     description:
       name: cubid_flutter
-      sha256: b0cd2d9c03d711d996710eec2b68163953ac3d3ff3d3fd76cf78df18ff118259
+      sha256: "08591dd70700c2d71526dec086b366c5857dec01cd4630a73449f801e5cb7e95"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "2.0.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -166,10 +174,10 @@ packages:
     dependency: transitive
     description:
       name: matcher
-      sha256: dc0b7dc7651697ea4ff3e69ef44b0407ea32c487a39fff6a4004fa585e901861
+      sha256: "31bd099b47c10cd1aeb55146a2d46ce0277630ecef3f7dae54ad7873f36696cd"
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.19"
+    version: "0.12.20"
   material_color_utilities:
     dependency: transitive
     description:
@@ -182,10 +190,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
+      sha256: "307249ce4ff29d58a18e97f6345f539382eb9c9c29ecda628900f31de0443dd9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.19.0"
   path:
     dependency: transitive
     description:
@@ -275,18 +283,18 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "8161c84903fd860b26bfdefb7963b3f0b68fee7adea0f59ef805ecca346f0c7a"
+      sha256: "2a122cbe059f8b610d3a5415f42e255b6c17b1f21eee1d960f31080237fb4f11"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.10"
+    version: "0.7.12"
   vector_math:
     dependency: transitive
     description:
       name: vector_math
-      sha256: d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b
+      sha256: "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.4.3"
   vm_service:
     dependency: transitive
     description:
@@ -304,5 +312,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=3.9.2 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  dart: ">=3.12.0 <4.0.0"
+  flutter: ">=3.44.0"
