@@ -39,7 +39,7 @@ dependencies:
 * adforus_uad_adapter: Admob 광고 연동을 위한 메인 어댑터 SDK [adforus_uad_adapter 최신버전 ](https://pub.dev/packages/adforus_uad_adapter)
 * upan: Pangle 광고 연동을 위한 어댑터 SDK [adforus_upan_adapter 최신버전 ](https://pub.dev/packages/adforus_upan_adapter)
 * cubex: 자사 RTB 광고 연동을 위한 어댑터 SDK [adforus_cubex_adapter 최신버전 ](https://pub.dev/packages/adforus_cubex_adapter)
-* ual: Approving 광고 연동을 위한 어댑터 SDK [adforus_cubex_adapter 최신버전 ](https://pub.dev/packages/adforus_ual_adapter)
+* ual: Approving 광고 연동을 위한 어댑터 SDK [adforus_ual_adapter 최신버전 ](https://pub.dev/packages/adforus_ual_adapter)
 ```yaml
 dependencies:
   cubid_flutter: ^x.y.z // Core Module - required
