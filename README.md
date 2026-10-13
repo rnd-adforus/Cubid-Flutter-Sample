@@ -1,43 +1,5 @@
 # Cubid Flutter Plugin
 
-## Release verification (2026-10-13)
-
-The sample was checked using release builds only, with UAD `2.2.0`, UPAN
-`1.3.0`, CuBid `2.0.1`, CubeX `1.4.0`, and a local UAL `1.0.2` override
-pointing to the prepared adapter with Android UAL SDK `1.0.1`.
-Published UAL adapter `1.0.1` still uses Android UAL SDK `1.0.0`.
-CubeX was updated because its old native SDK lacked two reward classes that
-the current CuBid SDK loads by reflection.
-
-```sh
-cd example
-flutter pub get
-flutter build apk --release
-flutter build appbundle --release
-flutter build ios --release --no-codesign
-```
-
-Android APK/AAB and unsigned iOS release builds passed. The Android APK is
-non-debuggable, uses R8, retains all 52 native classes looked up by CuBid,
-and passes ARM64 ELF and APK ZIP alignment checks for 16 KB pages.
-UAD supplies Google's Next-Gen Ads SDK transitively; no additional legacy
-Google Ads SDK or mediation exclusion was added.
-
-The existing Android ad units initialized and displayed all three Google
-banner sizes, a Google native ad, and AppLovin MAX fullscreen test ads.
-An earlier Android 17 release run also received rewarded completion and
-close callbacks. No app crash or runtime linkage exception was observed.
-However, the final release fullscreen runs did not expose a close control
-or complete the close/reward callback checks. The interstitial issue also
-occurred in a release build with resource shrinking disabled. Google's
-native validator additionally warned that the media view was too small.
-These ad-flow checks remain unresolved; successful builds are not a full
-runtime sign-off. Pangle/CubeX ad delivery was not forced, and iOS ads were
-not run on a device.
-
-Build logs, runtime logs, and screenshots are in `example/build/sample-*`.
-The sample still uses its debug signing key for local release verification.
-
 ## 기본 요건
 * Flutter SDK 3.13.1 이상
 * 권장사항: Flutter SDK 3.27.1 이상
